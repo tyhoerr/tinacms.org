@@ -1,7 +1,7 @@
 ---
-title: 'Authenticating with Strapi'
+title: Authenticating with Strapi
+last_edited: '2021-03-24T13:42:54.618Z'
 ---
-
 Before we can implement an editing experience, we need to set up an authentication experience. To do this, we'll be running through setting up credentials through Strapi.
 
 ## Using Next.js Preview Mode
@@ -30,7 +30,7 @@ export default previewHandler
 
 Upon authenticating, Strapi will pass us a JWT. We store this JWT in `previewData` from where we will pull it anytime we want to call a Strapi API.
 
-Create another file called `pages/api/reset-preview.ts` and give it the following content.
+Create another file called `pages/api/reset-preview.js` and give it the following content.
 
 **pages/api/reset-preview.js**
 
@@ -59,7 +59,7 @@ Head into `pages/_app.js`. We're going to add a button to our pages that will po
 
 First we'll enable or disable Tina based on whether we're in preview mode.
 
-**pages/\_app.js**
+**pages/_app.js**
 
 ```diff
   const cms = useMemo(() => new TinaCMS({
@@ -76,7 +76,7 @@ First we'll enable or disable Tina based on whether we're in preview mode.
 
 Next, we need to create functions that let our Strapi provider know what we want to do when authenticating/unauthenticating. Add the following two methods to the bottom of `_app.js`.
 
-**pages/\_app.js**
+**pages/_app.js**
 
 ```js
 const enterEditMode = () => {
@@ -94,7 +94,7 @@ const exitEditMode = () => {
 
 Pass these two functions into the Strapi provider, and give Strapi knowledge of whether or not we're in preview mode.
 
-**pages/\_app.js**
+**pages/_app.js**
 
 ```diff
       <StrapiProvider
@@ -115,7 +115,7 @@ Now the Strapi provider knows to call our two API functions whenever authenticat
 
 Finally, we'll go ahead and actually create a button that will let us enter/exit editing mode. Create a new component:
 
-**pages/\_app.js**
+**pages/_app.js**
 
 ```js
 import { useCMS } from '@tinacms/react-core'
@@ -134,7 +134,7 @@ export const EditButton = () => {
 
 For simplicity, we'll just have that button be displayed at the top of every page.
 
-**pages/\_app.js**
+**pages/_app.js**
 
 ```diff
   return (
